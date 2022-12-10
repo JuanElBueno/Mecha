@@ -103,15 +103,15 @@ echo.
 net stop XboxNetApiSvc
 echo.
 net stop vmictimesync
-
+echo.
 net stop vmicrdv
-
+echo.
 net stop PhoneSvc
-
+echo.
 net stop SCardSvr
-
+echo.
 net stop XboxGipSvc
-
+echo.
 sc config "XblAuthManager" start= disabled
 echo.
 sc config "MapsBroker" start= disabled
@@ -139,17 +139,17 @@ echo.
 sc config "XboxNetApiSvc" start= disabled
 echo.
 sc config "vmictimesync" start= disabled
-
+echo.
 sc config "vmicrdv" start= disabled
-
+echo.
 sc config "WerSvc" start= disabled
-
+echo.
 sc config "vmicvmsession" start= disabled
-
+echo.
 sc config "PhoneSvc" start= disabled
-
+echo.
 sc config "SCardSvr" start= disabled
-
+echo.
 sc config "XboxGipSvc" start= disabled
 echo %fblanco%[+] Ha se a desavilitado servicios...
 timeout /T 10 >nul
