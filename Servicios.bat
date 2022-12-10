@@ -20,6 +20,7 @@ set flila=[95m
 set fcyan=[96m
 set fblanco=[97m
 set titulo1=Juan El Bueno
+
 echo %camarillo% Comprobando conectividad ... %fblanco%
 ping -n 1 8.8.8.8
 
