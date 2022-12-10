@@ -57,7 +57,7 @@ if "%Versiontwo%" gtr "%Version%" (
 	"%SystemRoot%\System32\choice.exe" /c:YN /n /m "%DEL%                                >:"
 	set "choice=!errorlevel!"
 	if !choice! == 1 (
-		"%SystemRoot%\System32\curl.exe" -L -o %USERPROFILE%\Desktop\Servicios.bat "" >nul 2>&1
+		"%SystemRoot%\System32\curl.exe" -L -o %USERPROFILE%\Desktop\Servicios.bat "https://raw.githubusercontent.com/JuanElBueno/Mecha/main/Servicios.bat" >nul 2>&1
 		call %USERPROFILE%\Desktop\Servicios.bat
 		exit /b
 	)
