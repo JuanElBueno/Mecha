@@ -80,11 +80,11 @@ net stop DiagTrack
 echo.
 net stop PrintNotify
 echo.
-nst stop autotimesvc
+net stop autotimesvc
 echo.
 net stop vmicguestinterface
 echo.
-nst stop WbioSrvc
+net stop WbioSrvc
 echo.
 net stop EntAppSvc
 echo.
