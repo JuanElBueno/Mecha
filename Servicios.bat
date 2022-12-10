@@ -96,6 +96,10 @@ net stop DPS
 echo.
 net stop lfsvc
 echo.
+net stop vmickvpexchange
+echo.
+net stop vmicheartbeat
+echo.
 sc config "XblAuthManager" start= disabled
 echo.
 sc config "MapsBroker" start= disabled
@@ -117,6 +121,9 @@ echo.
 sc config "vmicshutdown" start= disabled
 echo.
 sc config "lfsvc" start= disabled
+
+sc config "vmicheartbeat" start= disabled
+
 
 echo %fblanco%[+] Ha se a desavilitado servicios...
 timeout /T 10 >nul
