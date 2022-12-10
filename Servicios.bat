@@ -19,7 +19,7 @@ set fazul=[94m
 set flila=[95m
 set fcyan=[96m
 set fblanco=[97m
-
+set titulo1=Juan El Bueno
 echo %camarillo% Comprobando conectividad ... %fblanco%
 ping -n 1 8.8.8.8
 
@@ -61,6 +61,13 @@ if "%Versiontwo%" gtr "%Version%" (
 		call %USERPROFILE%\Desktop\Servicios.bat
 		exit /b
 	)
+)
+
+
+if "%PROCESSOR_ARCHITECTURE%"=="x86" (
+  set Titulo=%titulo1% %Versiontwo% (32 bits)
+) else (
+  set Titulo=%titulo1% %Versiontwo%  (64 bits)
 )
 
 :home
