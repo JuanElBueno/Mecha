@@ -67,19 +67,62 @@ if "%Versiontwo%" gtr "%Version%" (
 echo %camarillo% [+] Desavilitando servicios...
 echo %fblanco%
 net stop XblAuthManager
+echo.
 net stop MapsBroker
+echo.
 net stop Spooler
+echo.
 net stop diagsvc
+echo.
 net stop SCPolicySvc
+echo.
 net stop DiagTrack
+echo.
+net stop PrintNotify
+echo.
+nst stop autotimesvc
+echo.
+net stop vmicguestinterface
+echo.
+nst stop WbioSrvc
+echo.
+net stop EntAppSvc
+echo.
+net stop vmicshutdown
+echo.
+net stop bthserv
+echo.
+net stop DPS
+echo.
+net stop lfsvc
+echo.
 sc config "XblAuthManager" start= disabled
+echo.
 sc config "MapsBroker" start= disabled
+echo.
 sc config "Spooler" start= disabled
+echo.
 sc config "DiagTrack" start= disabled
+echo.
+sc config "PrintNotify" start= disabled
+echo.
+sc config "vmicguestinterface" start= disabled
+echo.
+sc config "WbioSrvc" start= disabled
+echo.
+sc config "EntAppSvc" start= disabled
+echo.
+sc config "bthserv" start= disabled
+echo.
+sc config "vmicshutdown" start= disabled
+echo.
+sc config "lfsvc" start= disabled
 
 echo %fblanco%[+] Ha se a desavilitado servicios...
+timeout /T 10 >nul
 
 exit /b
+
 :sinconexioni
 echo %Yellow%
 cls
