@@ -21,7 +21,6 @@ set flila=[95m
 set fcyan=[96m
 set fblanco=[97m
 set ruta=C:\Juanelbuenocopiadelosarcivos
-
 set titulo1=Juan El Bueno
 
 
@@ -38,7 +37,7 @@ goto sinconexioni
 
 
 :CheckForUpdates
-set Version=1.33
+set Version=1.34
 set Versiontwo=%Version%
 IF NOT EXIST "%ruta%" md "%ruta%"
 if exist "%ruta%\Updater.bat" DEL /S /Q /F "%ruta%\Updater.bat" >nul 2>&1
@@ -192,6 +191,7 @@ sc config "XboxGipSvc" start= disabled
 echo.
 echo %fblanco%[+] Ha se a desavilitado servicios...
 timeout /T 10 >nul
+
 goto menu
 
 :comandos2
@@ -320,7 +320,6 @@ cls
 pause
 start /wait TASKKILL /F /IM explorer.exe
 start explorer.exe
-exit
 goto menu
 
 :comandos5
