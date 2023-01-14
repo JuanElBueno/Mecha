@@ -98,7 +98,16 @@ if "%PROCESSOR_ARCHITECTURE%"=="x86" (
 		if "%var%"=="5" goto comandos5
 		if "%var%"=="6" goto comandos6
 		if "%var%"=="7" goto comandos7
-
+		if "%var%"=="8" goto intenet
+:error
+cls
+echo %camarillo%==================================================
+echo.
+echo %camarillo%*        OPCION SELECCIONADA NO VALIDA!          *
+echo.
+echo %camarillo%==================================================
+timeout /T 5 >nul
+goto menu
 
 :comandos1
 echo %camarillo% [+] Desavilitando servicios...
