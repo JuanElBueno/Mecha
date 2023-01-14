@@ -38,7 +38,7 @@ goto sinconexioni
 
 
 :CheckForUpdates
-set Version=1.30
+set Version=1.31
 set Versiontwo=%Version%
 IF NOT EXIST "%ruta%" md "%ruta%"
 if exist "%ruta%\Updater.bat" DEL /S /Q /F "%ruta%\Updater.bat" >nul 2>&1
@@ -98,7 +98,7 @@ if "%PROCESSOR_ARCHITECTURE%"=="x86" (
 		if "%var%"=="4" goto comandos4
 		if "%var%"=="5" goto comandos5
 		if "%var%"=="6" goto comandos6
-		if "%var%"=="6" goto comandos7
+		if "%var%"=="7" goto comandos7
 
 
 :comandos1
