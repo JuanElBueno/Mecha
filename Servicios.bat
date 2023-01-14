@@ -192,6 +192,7 @@ sc config "XboxGipSvc" start= disabled
 echo.
 echo %fblanco%[+] Ha se a desavilitado servicios...
 timeout /T 10 >nul
+goto menu
 
 :comandos2
 bcdedit /set disabledynamictick yes
