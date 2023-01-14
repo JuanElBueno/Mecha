@@ -26,7 +26,7 @@ set titulo1=Juan El Bueno
 
 
 echo %camarillo% Comprobando conectividad ... %fblanco%
-ping -n 1 8.8.8.8 >nul
+ping -n 1 8.8.8.8
 
 if %ERRORLEVEL%==0 ( 
 set wifi=true
