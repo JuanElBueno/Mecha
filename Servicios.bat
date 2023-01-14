@@ -38,7 +38,7 @@ goto sinconexioni
 
 
 :CheckForUpdates
-set Version=1.32
+set Version=1.33
 set Versiontwo=%Version%
 IF NOT EXIST "%ruta%" md "%ruta%"
 if exist "%ruta%\Updater.bat" DEL /S /Q /F "%ruta%\Updater.bat" >nul 2>&1
