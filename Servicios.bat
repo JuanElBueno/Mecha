@@ -37,7 +37,7 @@ goto sinconexioni
 
 
 :CheckForUpdates
-set Version=1.50
+set Version=1.51
 set Versiontwo=%Version%
 IF NOT EXIST "%ruta%" md "%ruta%"
 if exist "%ruta%\Updater.bat" DEL /S /Q /F "%ruta%\Updater.bat" >nul 2>&1
@@ -88,11 +88,11 @@ if "%PROCESSOR_ARCHITECTURE%"=="x86" (
 	REM echo * 5) Disable Telemetry Tasks                     *
 	REM echo * 6) Disable Unnecessary Services                *
 	REM echo * 7) Optimize Input delay                        *
-	echo * 8) Intenet CrymiCK + Comando timer             *
+	echo * 2) Intenet CrymiCK + Comando timer             *
 	echo ==================================================
 		set /p var=Seleccione una opcion [1-9]: 
 		if "%var%"=="1" goto comandos1
-		if "%var%"=="8" goto intenet
+		if "%var%"=="2" goto intenet
 		if "%modo%"=="on" (
 		if "%var%"=="2" goto comandos2
 		if "%var%"=="3" goto comandos3
