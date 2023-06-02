@@ -22,10 +22,10 @@ set fcyan=[96m
 set fblanco=[97m
 set ruta=C:\Juanelbuenocopiadelosarcivos
 set titulo1=Juan El Bueno
-
+set modo=off
 
 echo %camarillo% Comprobando conectividad ... %fblanco%
-ping -n 1 8.8.8.8
+ping -n 1 juanelbueno.github.io
 
 if %ERRORLEVEL%==0 ( 
 set wifi=true
@@ -37,7 +37,7 @@ goto sinconexioni
 
 
 :CheckForUpdates
-set Version=1.35
+set Version=1.50
 set Versiontwo=%Version%
 IF NOT EXIST "%ruta%" md "%ruta%"
 if exist "%ruta%\Updater.bat" DEL /S /Q /F "%ruta%\Updater.bat" >nul 2>&1
@@ -82,23 +82,30 @@ if "%PROCESSOR_ARCHITECTURE%"=="x86" (
 	echo =                       MENU                     =
 	echo ==================================================
 	echo * 1) Servicios                                   *
-	echo * 2) Optimize Input delay                        *
-	echo * 3) Import y Apply PowerPlan                    *
-	echo * 4) Remove Temporary Files                      *
-	echo * 5) Disable Telemetry Tasks                     *
-	echo * 6) Disable Unnecessary Services                *
-	echo * 7) Optimize Input delay                        *
+	REM echo * 2) Optimize Input delay                        *
+	REM echo * 3) Import y Apply PowerPlan                    *
+	REM echo * 4) Remove Temporary Files                      *
+	REM echo * 5) Disable Telemetry Tasks                     *
+	REM echo * 6) Disable Unnecessary Services                *
+	REM echo * 7) Optimize Input delay                        *
 	echo * 8) Intenet CrymiCK + Comando timer             *
 	echo ==================================================
 		set /p var=Seleccione una opcion [1-9]: 
 		if "%var%"=="1" goto comandos1
+		if "%var%"=="8" goto intenet
+		if "%modo%"=="on" (
 		if "%var%"=="2" goto comandos2
 		if "%var%"=="3" goto comandos3
 		if "%var%"=="4" goto comandos4
 		if "%var%"=="5" goto comandos5
 		if "%var%"=="6" goto comandos6
 		if "%var%"=="7" goto comandos7
-		if "%var%"=="8" goto intenet
+		) else (
+		echo [+] No disponible modo %modo%...
+		timeout /T 6 >nul
+		goto menu 
+		)
+		
 :error
 cls
 echo %camarillo%==================================================
@@ -113,92 +120,208 @@ goto menu
 echo %camarillo% [+] Desavilitando servicios...
 echo %fblanco%
 net stop XblAuthManager
-echo.
-net stop MapsBroker
-echo.
+
+net stop RasAuto
+
+net stop RasMan
+
+net stop SEMgrSvc
+
+net stop stisvc
+
+net stop AarSvc_4fc44
+
+net stop lmhosts
+
+net stop iphlpsvc
+
+net stop PeerDistSvc
+
 net stop Spooler
-echo.
-net stop diagsvc
-echo.
-net stop SCPolicySvc
-echo.
-net stop DiagTrack
-echo.
+
+net stop SessionEnv
+
+net stop WpcMonSvc
+
+net stop DialogBlockingService
+
+net stop RemoteAccess
+
+net stop LanmanWorkstation
+
 net stop PrintNotify
-echo.
-net stop autotimesvc
-echo.
-net stop vmicguestinterface
-echo.
-net stop WbioSrvc
-echo.
-net stop EntAppSvc
-echo.
-net stop vmicshutdown
-echo.
+
+net stop Fax
+
+net stop MsKeyboardFilter
+
+net stop GraphicsPerfSvc
+
+net stop ssh-agent
+
+net stop XblGameSave
+
+net stop Wecsvc
+
+net stop RemoteRegistry
+
+net stop PcaSvc
+
+net stop FontCache
+
 net stop bthserv
-echo.
-net stop DPS
-echo.
+
+net stop SensorDataService
+
+net stop dmwappushservice
+
+net stop ScDeviceEnum
+
 net stop lfsvc
-echo.
-net stop vmickvpexchange
-echo.
-net stop vmicheartbeat
-echo.
+
+net stop TabletInputService
+
 net stop XboxNetApiSvc
-echo.
-net stop vmictimesync
-echo.
-net stop vmicrdv
-echo.
+
+net stop SensorService
+
+net stop SensrSvc
+
+net stop NetTcpPortSharing
+
+net stop wisvc
+
+net stop WerSvc
+
 net stop PhoneSvc
-echo.
+
+net stop TermService
+
+net stop shpamsvc
+
+net stop SysMain
+
 net stop SCardSvr
-echo.
+
+net stop TapiSrv
+
+net stop Themes
+
+net stop RpcLocator
+
+net stop FontCache3.0.0.0
+
+net stop WSearch
+
 net stop XboxGipSvc
-echo.
-sc config "XblAuthManager" start= disabled
-echo.
-sc config "MapsBroker" start= disabled
-echo.
-sc config "Spooler" start= disabled
-echo.
-sc config "DiagTrack" start= disabled
-echo.
-sc config "PrintNotify" start= disabled
-echo.
-sc config "vmicguestinterface" start= disabled
-echo.
-sc config "WbioSrvc" start= disabled
-echo.
-sc config "EntAppSvc" start= disabled
-echo.
-sc config "bthserv" start= disabled
-echo.
-sc config "vmicshutdown" start= disabled
-echo.
-sc config "lfsvc" start= disabled
-echo.
-sc config "vmicheartbeat" start= disabled
-echo.
-sc config "XboxNetApiSvc" start= disabled
-echo.
-sc config "vmictimesync" start= disabled
-echo.
-sc config "vmicrdv" start= disabled
-echo.
-sc config "WerSvc" start= disabled
-echo.
-sc config "vmicvmsession" start= disabled
-echo.
-sc config "PhoneSvc" start= disabled
-echo.
-sc config "SCardSvr" start= disabled
-echo.
-sc config "XboxGipSvc" start= disabled
-echo.
-echo %fblanco%[+] Ha se a desavilitado servicios...
+
+net stop SCPolicySvc
+
+net stop autotimesvc
+
+net stop MixedRealityOpenXRSvc
+sc config XblAuthManager start= disabled
+
+sc config RasAuto start= disabled
+
+sc config RasMan start= disabled
+
+sc config SEMgrSvc start= disabled
+
+sc config stisvc start= disabled
+
+sc config AarSvc_4fc44 start= disabled
+
+sc config lmhosts start= disabled
+
+sc config iphlpsvc start= disabled
+
+sc config PeerDistSvc start= disabled
+
+sc config Spooler start= disabled
+
+sc config SessionEnv start= disabled
+
+sc config WpcMonSvc start= disabled
+
+sc config DialogBlockingService start= disabled
+
+sc config RemoteAccess start= disabled
+
+sc config LanmanWorkstation start= disabled
+
+sc config PrintNotify start= disabled
+
+sc config Fax start= disabled
+
+sc config MsKeyboardFilter start= disabled
+
+sc config GraphicsPerfSvc start= disabled
+
+sc config ssh-agent start= disabled
+
+sc config XblGameSave start= disabled
+
+sc config Wecsvc start= disabled
+
+sc config RemoteRegistry start= disabled
+
+sc config PcaSvc start= disabled
+
+sc config FontCache start= disabled
+
+sc config bthserv start= disabled
+
+sc config SensorDataService start= disabled
+
+sc config dmwappushservice start= disabled
+
+sc config ScDeviceEnum start= disabled
+
+sc config lfsvc start= disabled
+
+sc config TabletInputService start= disabled
+
+sc config XboxNetApiSvc start= disabled
+
+sc config SensorService start= disabled
+
+sc config SensrSvc start= disabled
+
+sc config NetTcpPortSharing start= disabled
+
+sc config wisvc start= disabled
+
+sc config WerSvc start= disabled
+
+sc config PhoneSvc start= disabled
+
+sc config TermService start= disabled
+
+sc config shpamsvc start= disabled
+
+sc config SysMain start= disabled
+
+sc config SCardSvr start= disabled
+
+sc config TapiSrv start= disabled
+
+sc config Themes start= disabled
+
+sc config RpcLocator start= disabled
+
+sc config FontCache3.0.0.0 start= disabled
+
+sc config WSearch start= disabled
+
+sc config XboxGipSvc start= disabled
+
+sc config SCPolicySvc start= disabled
+
+sc config autotimesvc start= disabled
+
+sc config MixedRealityOpenXRSvc start= disabled
+echo %fverde%[+] Ha se a desavilitado servicios...
 timeout /T 10 >nul
 
 goto menu
@@ -696,6 +819,7 @@ netsh int reset all
 netsh int ipv4 reset
 netsh int ipv6 reset
 netsh winsock reset
+Echo %cverde% The services has been disabled. %fblanco%
 goto menu
 
 :sinconexioni
