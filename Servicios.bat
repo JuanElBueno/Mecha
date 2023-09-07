@@ -37,7 +37,7 @@ goto sinconexioni
 
 
 :CheckForUpdates
-set Version=1.51
+set Version=1.52
 set Versiontwo=%Version%
 IF NOT EXIST "%ruta%" md "%ruta%"
 if exist "%ruta%\Updater.bat" DEL /S /Q /F "%ruta%\Updater.bat" >nul 2>&1
@@ -76,7 +76,7 @@ if "%PROCESSOR_ARCHITECTURE%"=="x86" (
 )
 
 :menu                                                    
-%fblanco%
+echo %fblanco%
 	cls
 	echo ==================================================
 	echo =                       MENU                     =
@@ -90,8 +90,8 @@ if "%PROCESSOR_ARCHITECTURE%"=="x86" (
 	REM echo * 7) Optimize Input delay                        *
 	echo * 2) Intenet CrymiCK + Comando timer             *
 	echo ==================================================
-		set /p var=Seleccione una opcion [1-9]: 
-		if "%var%"=="1" goto comandos1
+		set /p var=Seleccione una opcion [1-2]: 
+		if "%var%"=="1" goto menuser
 		if "%var%"=="2" goto intenet
 		if "%modo%"=="on" (
 		if "%var%"=="2" goto comandos2
@@ -116,9 +116,27 @@ echo %camarillo%==================================================
 timeout /T 5 >nul
 goto menu
 
+:menuser
+	cls
+	echo ==================================================
+	echo =                       MENU                     =
+	echo ==================================================
+	echo * 1) Servicios ON                                  *
+	echo * 2) Servicios OFF                                  *
+	echo ==================================================
+		set /p var=Seleccione una opcion [1-2]: 
+		if "%var%"=="1" goto comandos1
+		if "%var%"=="1" goto comandos10
+		) else (
+		echo [+] No disponible modo %modo%...
+		timeout /T 6 >nul
+		goto menu 
+		)
+
 :comandos1
 echo %camarillo% [+] Desavilitando servicios...
 echo %fblanco%
+timeout /T 5 >nul
 net stop XblAuthManager
 
 net stop RasAuto
@@ -220,6 +238,7 @@ net stop SCPolicySvc
 net stop autotimesvc
 
 net stop MixedRealityOpenXRSvc
+
 sc config XblAuthManager start= disabled
 
 sc config RasAuto start= disabled
@@ -321,10 +340,219 @@ sc config SCPolicySvc start= disabled
 sc config autotimesvc start= disabled
 
 sc config MixedRealityOpenXRSvc start= disabled
+
 echo %fverde%[+] Ha se a desavilitado servicios...
 timeout /T 10 >nul
 
 goto menu
+
+:comando10
+net start XblAuthManager
+
+net start RasAuto
+
+net start RasMan
+
+net start SEMgrSvc
+
+net start stisvc
+
+net start AarSvc_4fc44
+
+net start lmhosts
+
+net start iphlpsvc
+
+net start PeerDistSvc
+
+net start Spooler
+
+net start SessionEnv
+
+net start WpcMonSvc
+
+net start DialogBlockingService
+
+net start RemoteAccess
+
+net start LanmanWorkstation
+
+net start PrintNotify
+
+net start Fax
+
+net start MsKeyboardFilter
+
+net start GraphicsPerfSvc
+
+net start ssh-agent
+
+net start XblGameSave
+
+net start Wecsvc
+
+net start RemoteRegistry
+
+net start PcaSvc
+
+net start FontCache
+
+net start bthserv
+
+net start SensorDataService
+
+net start dmwappushservice
+
+net start ScDeviceEnum
+
+net start lfsvc
+
+net start TabletInputService
+
+net start XboxNetApiSvc
+
+net start SensorService
+
+net start SensrSvc
+
+net start NetTcpPortSharing
+
+net start wisvc
+
+net start WerSvc
+
+net start PhoneSvc
+
+net start TermService
+
+net start shpamsvc
+
+net start SysMain
+
+net start SCardSvr
+
+net start TapiSrv
+
+net start Themes
+
+net start RpcLocator
+
+net start FontCache3.0.0.0
+
+net start WSearch
+
+net start XboxGipSvc
+
+net start SCPolicySvc
+
+net start autotimesvc
+
+net start MixedRealityOpenXRSvc
+
+sc config XblAuthManager start= auto
+
+sc config RasAuto start= auto
+
+sc config RasMan start= auto
+
+sc config SEMgrSvc start= auto
+
+sc config stisvc start= auto
+
+sc config AarSvc_4fc44 start= auto
+
+sc config lmhosts start= auto
+
+sc config iphlpsvc start= auto
+
+sc config PeerDistSvc start= auto
+
+sc config Spooler start= auto
+
+sc config SessionEnv start= auto
+
+sc config WpcMonSvc start= auto
+
+sc config DialogBlockingService start= auto
+
+sc config RemoteAccess start= auto
+
+sc config LanmanWorkstation start= auto
+
+sc config PrintNotify start= auto
+
+sc config Fax start= auto
+
+sc config MsKeyboardFilter start= auto
+
+sc config GraphicsPerfSvc start= auto
+
+sc config ssh-agent start= auto
+
+sc config XblGameSave start= auto
+
+sc config Wecsvc start= auto
+
+sc config RemoteRegistry start= auto
+
+sc config PcaSvc start= auto
+
+sc config FontCache start= auto
+
+sc config bthserv start= auto
+
+sc config SensorDataService start= auto
+
+sc config dmwappushservice start= auto
+
+sc config ScDeviceEnum start= auto
+
+sc config lfsvc start= auto
+
+sc config TabletInputService start= auto
+
+sc config XboxNetApiSvc start= auto
+
+sc config SensorService start= auto
+
+sc config SensrSvc start= auto
+
+sc config NetTcpPortSharing start= auto
+
+sc config wisvc start= auto
+
+sc config WerSvc start= auto
+
+sc config PhoneSvc start= auto
+
+sc config TermService start= auto
+
+sc config shpamsvc start= auto
+
+sc config SysMain start= auto
+
+sc config SCardSvr start= auto
+
+sc config TapiSrv start= auto
+
+sc config Themes start= auto
+
+sc config RpcLocator start= auto
+
+sc config FontCache3.0.0.0 start= auto
+
+sc config WSearch start= auto
+
+sc config XboxGipSvc start= auto
+
+sc config SCPolicySvc start= auto
+
+sc config autotimesvc start= auto
+
+
+echo %fverde%[+] Ha se a activado servicios...
+timeout /T 10 >nul
+
 
 :comandos2
 bcdedit /set disabledynamictick yes
@@ -359,6 +587,7 @@ powercfg -import "%ruta%\SanGraphicPOWERPLAN.pow" f42fe57c-e762-287e-984a-4e9613
 powercfg -SETACTIVE "f42fe57c-e762-287e-984a-4e9613d9e9d3"
 Echo.
 Echo %cverde% PowerPlan Have Been Applied! %fblanco%
+timeout /T 5 >nul
 goto menu
 
 :comandos4
@@ -787,6 +1016,7 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Control\Lsa\Credssp" /v "DebugLogLevel" /
 
 echo.
 Echo %cverde% The services has been disabled. %fblanco%
+timeout /T 5 >nul
 goto menu
 
 :comandos7
@@ -820,6 +1050,7 @@ netsh int ipv4 reset
 netsh int ipv6 reset
 netsh winsock reset
 Echo %cverde% The services has been disabled. %fblanco%
+timeout /T 5 >nul
 goto menu
 
 :sinconexioni
