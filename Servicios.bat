@@ -126,7 +126,7 @@ goto menu
 	echo ==================================================
 		set /p var=Seleccione una opcion [1-2]: 
 		if "%var%"=="1" goto comandos1
-		if "%var%"=="2" goto comandos10
+		if "%var%"=="1" goto comandos10
 		) else (
 		echo [+] No disponible modo %modo%...
 		timeout /T 6 >nul
