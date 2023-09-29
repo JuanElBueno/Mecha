@@ -121,8 +121,8 @@ goto menu
 	echo ==================================================
 	echo =                       MENU                     =
 	echo ==================================================
-	echo * 1) Servicios ON                                  *
-	echo * 2) Servicios OFF                                  *
+	echo * 1) Servicios OFF                                  *
+	echo * 2) Servicios ON                                  *
 	echo ==================================================
 		set /p var=Seleccione una opcion [1-2]: 
 		if "%var%"=="1" goto comandos1
