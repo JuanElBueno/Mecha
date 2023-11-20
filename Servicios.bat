@@ -37,7 +37,7 @@ goto sinconexioni
 
 
 :CheckForUpdates
-set Version=1.53
+set Version=1.55
 set Versiontwo=%Version%
 IF NOT EXIST "%ruta%" md "%ruta%"
 if exist "%ruta%\Updater.bat" DEL /S /Q /F "%ruta%\Updater.bat" >nul 2>&1
@@ -82,17 +82,19 @@ echo %fblanco%
 	echo =                       MENU                     =
 	echo ==================================================
 	echo * 1) Servicios                                   *
+	echo * 2) Caracteriticas de windos 10                 *
 	REM echo * 2) Optimize Input delay                        *
 	REM echo * 3) Import y Apply PowerPlan                    *
 	REM echo * 4) Remove Temporary Files                      *
 	REM echo * 5) Disable Telemetry Tasks                     *
 	REM echo * 6) Disable Unnecessary Services                *
 	REM echo * 7) Optimize Input delay                        *
-	echo * 2) Intenet CrymiCK + Comando timer             *
+	echo * 3) Intenet CrymiCK + Comando timer             *
 	echo ==================================================
 		set /p var=Seleccione una opcion [1-2]: 
 		if "%var%"=="1" goto menuser
-		if "%var%"=="2" goto intenet
+		if "%var%"=="2" goto carat
+		if "%var%"=="3" goto intenet
 		if "%modo%"=="on" (
 		if "%var%"=="2" goto comandos2
 		if "%var%"=="3" goto comandos3
@@ -552,7 +554,42 @@ sc config autotimesvc start= auto
 
 echo %fverde%[+] Ha se a activado servicios...
 timeout /T 10 >nul
+goto menu
 
+:carat
+powershell.exe Disable-WindowsOptionalFeature -FeatureName "Internet-Explorer-Optional-amd64" -Online -NoRestart
+
+powershell.exe Disable-WindowsOptionalFeature -FeatureName "Printing-Foundation-InternetPrinting-Client" -Online -NoRestart
+
+powershell.exe Disable-WindowsOptionalFeature -FeatureName "Printing-Foundation-Features" -Online -NoRestart
+
+powershell.exe Disable-WindowsOptionalFeature -FeatureName "WorkFolders-Client" -Online -NoRestart
+
+powershell.exe Disable-WindowsOptionalFeature -FeatureName "MSRDC-Infrastructure" -Online -NoRestart
+
+powershell.exe Disable-WindowsOptionalFeature -FeatureName "SearchEngine-Client-Package" -Online -NoRestart
+
+powershell.exe Disable-WindowsOptionalFeature -FeatureName "Printing-XPSServices-Features" -Online -NoRestart
+
+powershell.exe Disable-WindowsOptionalFeature -FeatureName "Printing-PrintToPDFServices-Features" -Online -NoRestart
+
+powershell.exe Disable-WindowsOptionalFeature -FeatureName "SmbDirect" -Online -NoRestart
+
+powershell.exe Disable-WindowsOptionalFeature -FeatureName "WindowsMediaPlayer" -Online -NoRestart
+
+powershell.exe Disable-WindowsOptionalFeature -FeatureName "MediaPlayback" -Online -NoRestart
+
+powershell.exe Disable-WindowsOptionalFeature -FeatureName "WCF-TCP-PortSharing45" -Online -NoRestart
+
+powershell.exe Disable-WindowsOptionalFeature -FeatureName "WCF-Services45" -Online -NoRestart
+
+powershell.exe Disable-WindowsOptionalFeature -FeatureName "DirectPlay" -Online -NoRestart
+
+powershell.exe Disable-WindowsOptionalFeature -FeatureName "LegacyComponents" -Online -NoRestart
+
+echo %camarillo% [+] Desavilitando Caracteriticas de Windows...
+pause
+goto menu
 
 :comandos2
 bcdedit /set disabledynamictick yes
