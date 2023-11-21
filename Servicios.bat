@@ -37,7 +37,7 @@ goto sinconexioni
 
 
 :CheckForUpdates
-set Version=1.55
+set Version=1.70
 set Versiontwo=%Version%
 IF NOT EXIST "%ruta%" md "%ruta%"
 if exist "%ruta%\Updater.bat" DEL /S /Q /F "%ruta%\Updater.bat" >nul 2>&1
@@ -136,10 +136,42 @@ goto menu
 		)
 
 :comandos1
+set /p varst1=Si quieres activar Xbox Services y/n:
+
+if "%varst1%"=="y" (
+net start XblGameSave
+sc config XblGameSave start= auto
+
+net start XboxNetApiSvc
+sc config XboxNetApiSvc start= auto
+
+net start XboxGipSvc
+sc config XboxGipSvc start= auto
+
+net start XblAuthManager
+sc config XboxGipSvc start= auto
+goto stservicios
+)
+
+if "%varst1%"=="n" (
+net stop XblGameSave
+sc config XblGameSave start= disabled
+
+net stop XboxNetApiSvc
+sc config XboxNetApiSvc start= disabled
+
+net stop XboxGipSvc
+sc config XboxGipSvc start= disabled
+
+net stop XblAuthManager
+sc config XboxGipSvc start= disabled
+goto stservicios
+)
+
+:stservicios
 echo %camarillo% [+] Desavilitando servicios...
 echo %fblanco%
 timeout /T 5 >nul
-net stop XblAuthManager
 
 net stop RasAuto
 
@@ -179,8 +211,6 @@ net stop GraphicsPerfSvc
 
 net stop ssh-agent
 
-net stop XblGameSave
-
 net stop Wecsvc
 
 net stop RemoteRegistry
@@ -200,8 +230,6 @@ net stop ScDeviceEnum
 net stop lfsvc
 
 net stop TabletInputService
-
-net stop XboxNetApiSvc
 
 net stop SensorService
 
@@ -233,15 +261,11 @@ net stop FontCache3.0.0.0
 
 net stop WSearch
 
-net stop XboxGipSvc
-
 net stop SCPolicySvc
 
 net stop autotimesvc
 
 net stop MixedRealityOpenXRSvc
-
-sc config XblAuthManager start= disabled
 
 sc config RasAuto start= disabled
 
@@ -279,10 +303,6 @@ sc config MsKeyboardFilter start= disabled
 
 sc config GraphicsPerfSvc start= disabled
 
-sc config ssh-agent start= disabled
-
-sc config XblGameSave start= disabled
-
 sc config Wecsvc start= disabled
 
 sc config RemoteRegistry start= disabled
@@ -302,8 +322,6 @@ sc config ScDeviceEnum start= disabled
 sc config lfsvc start= disabled
 
 sc config TabletInputService start= disabled
-
-sc config XboxNetApiSvc start= disabled
 
 sc config SensorService start= disabled
 
@@ -335,8 +353,6 @@ sc config FontCache3.0.0.0 start= disabled
 
 sc config WSearch start= disabled
 
-sc config XboxGipSvc start= disabled
-
 sc config SCPolicySvc start= disabled
 
 sc config autotimesvc start= disabled
@@ -349,8 +365,39 @@ timeout /T 10 >nul
 goto menu
 
 :comando10
-net start XblAuthManager
+set /p varst1=Si quieres activar Xbox Services y/n:
 
+if "%varst1%"=="y" (
+net start XblGameSave
+sc config XblGameSave start= auto
+
+net start XboxNetApiSvc
+sc config XboxNetApiSvc start= auto
+
+net start XboxGipSvc
+sc config XboxGipSvc start= auto
+
+net start XblAuthManager
+sc config XboxGipSvc start= auto
+goto stservicios2
+)
+
+if "%varst1%"=="n" (
+net start XblGameSave
+sc config XblGameSave start= auto
+
+net start XboxNetApiSvc
+sc config XboxNetApiSvc start= auto
+
+net start XboxGipSvc
+sc config XboxGipSvc start= auto
+
+net start XblAuthManager
+sc config XboxGipSvc start= auto
+goto stservicios2
+)
+
+:stservicios2
 net start RasAuto
 
 net start RasMan
@@ -389,8 +436,6 @@ net start GraphicsPerfSvc
 
 net start ssh-agent
 
-net start XblGameSave
-
 net start Wecsvc
 
 net start RemoteRegistry
@@ -410,8 +455,6 @@ net start ScDeviceEnum
 net start lfsvc
 
 net start TabletInputService
-
-net start XboxNetApiSvc
 
 net start SensorService
 
@@ -443,15 +486,11 @@ net start FontCache3.0.0.0
 
 net start WSearch
 
-net start XboxGipSvc
-
 net start SCPolicySvc
 
 net start autotimesvc
 
 net start MixedRealityOpenXRSvc
-
-sc config XblAuthManager start= auto
 
 sc config RasAuto start= auto
 
@@ -491,8 +530,6 @@ sc config GraphicsPerfSvc start= auto
 
 sc config ssh-agent start= auto
 
-sc config XblGameSave start= auto
-
 sc config Wecsvc start= auto
 
 sc config RemoteRegistry start= auto
@@ -512,8 +549,6 @@ sc config ScDeviceEnum start= auto
 sc config lfsvc start= auto
 
 sc config TabletInputService start= auto
-
-sc config XboxNetApiSvc start= auto
 
 sc config SensorService start= auto
 
@@ -544,8 +579,6 @@ sc config RpcLocator start= auto
 sc config FontCache3.0.0.0 start= auto
 
 sc config WSearch start= auto
-
-sc config XboxGipSvc start= auto
 
 sc config SCPolicySvc start= auto
 
