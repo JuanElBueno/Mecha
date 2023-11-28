@@ -37,7 +37,7 @@ goto sinconexioni
 
 
 :CheckForUpdates
-set Version=1.70
+set Version=1.70.1
 set Versiontwo=%Version%
 IF NOT EXIST "%ruta%" md "%ruta%"
 if exist "%ruta%\Updater.bat" DEL /S /Q /F "%ruta%\Updater.bat" >nul 2>&1
@@ -621,6 +621,7 @@ powershell.exe Disable-WindowsOptionalFeature -FeatureName "DirectPlay" -Online 
 powershell.exe Disable-WindowsOptionalFeature -FeatureName "LegacyComponents" -Online -NoRestart
 
 echo %camarillo% [+] Desavilitando Caracteriticas de Windows...
+echo %camarillo% [+] Tienes que reiniciar para que funcione
 pause
 goto menu
 
