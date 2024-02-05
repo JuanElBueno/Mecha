@@ -37,7 +37,7 @@ goto sinconexioni
 
 
 :CheckForUpdates
-set Version=1.70.1
+set Version=1.70.1.2
 set Versiontwo=%Version%
 IF NOT EXIST "%ruta%" md "%ruta%"
 if exist "%ruta%\Updater.bat" DEL /S /Q /F "%ruta%\Updater.bat" >nul 2>&1
@@ -1116,7 +1116,7 @@ goto menu
 :intenet
 bcdedit /set useplatformtick yes
 ipconfig /flushdns
-netsh int reset all
+netsh int ip reset
 netsh int ipv4 reset
 netsh int ipv6 reset
 netsh winsock reset
