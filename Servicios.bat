@@ -40,7 +40,7 @@ goto sinconexioni
 
 
 :CheckForUpdates
-set Version=1.73
+set Version=1.73.1
 set Versiontwo=%Version%
 IF NOT EXIST "%ruta%" md "%ruta%"
 if exist "%ruta%\Updater.bat" DEL /S /Q /F "%ruta%\Updater.bat" >nul 2>&1
@@ -92,8 +92,8 @@ echo %fblanco%
 		set /p var=Seleccione una opcion [1-4]: 
 		if "%var%"=="1" goto menuser
 		if "%var%"=="2" goto carat
-		if "%var%"=="3" goto intenet
-		if "%var%"=="4" goto optimizacionmecha
+		if "%var%"=="3" goto optimizacionmecha
+		if "%var%"=="4" goto intenet
 		if "%modo%"=="on" (
 		) else (
 		echo [+] No disponible modo %modo%...
