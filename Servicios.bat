@@ -40,7 +40,7 @@ goto sinconexioni
 
 
 :CheckForUpdates
-set Version=1.70.1.2
+set Version=1.70.1.3
 set Versiontwo=%Version%
 IF NOT EXIST "%ruta%" md "%ruta%"
 if exist "%ruta%\Updater.bat" DEL /S /Q /F "%ruta%\Updater.bat" >nul 2>&1
@@ -356,7 +356,7 @@ timeout /T 10 >nul
 
 goto menu
 
-:comando10
+:comandos10
 set /p varst1=Si quieres activar Xbox Services y/n:
 
 if "%varst1%"=="y" (
