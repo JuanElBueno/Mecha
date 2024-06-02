@@ -40,7 +40,7 @@ goto sinconexioni
 
 
 :CheckForUpdates
-set Version=1.71.5
+set Version=1.71.6
 set Versiontwo=%Version%
 IF NOT EXIST "%ruta%" md "%ruta%"
 if exist "%ruta%\Updater.bat" DEL /S /Q /F "%ruta%\Updater.bat" >nul 2>&1
@@ -377,16 +377,16 @@ goto stservicios2
 )
 
 if "%varst1%"=="n" (
-net start XblGameSave
+net stop XblGameSave
 sc config XblGameSave start= disabled
 
-net start XboxNetApiSvc
+net stop XboxNetApiSvc
 sc config XboxNetApiSvc start= disabled
 
-net start XboxGipSvc
+net stop XboxGipSvc
 sc config XboxGipSvc start= disabled
 
-net start XblAuthManager
+net stop XblAuthManager
 sc config XboxGipSvc start= disabled
 goto stservicios2
 )
