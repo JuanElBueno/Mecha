@@ -28,7 +28,7 @@ set titulo1=Juan El Bueno
 set modo=off
 
 echo %camarillo% Comprobando conectividad ... %fblanco%
-ping -n 1 juanelbueno.github.io
+ping -n 1 juanelbueno.github.io 
 
 if %ERRORLEVEL%==0 ( 
 set wifi=true
@@ -40,7 +40,7 @@ goto sinconexioni
 
 
 :CheckForUpdates
-set Version=1.71
+set Version=1.71.5
 set Versiontwo=%Version%
 IF NOT EXIST "%ruta%" md "%ruta%"
 if exist "%ruta%\Updater.bat" DEL /S /Q /F "%ruta%\Updater.bat" >nul 2>&1
@@ -50,7 +50,7 @@ if "%Version%" gtr "%Versiontwo%" (
 	cls
 	echo.
 	echo %camarillo% --------------------------------------------------------------
-	echo                           Update found
+	echo                           Actualizacion Encontrada
 	echo %camarillo% --------------------------------------------------------------
 	echo.
 	echo %camarillo%                         Mi version: %Versiontwo%
@@ -59,7 +59,7 @@ if "%Version%" gtr "%Versiontwo%" (
 	echo.
 	echo.
 	echo.
-	echo %camarillo%     [Y] Yes, Update
+	echo %camarillo%     [Y] SI, Quiero Actualizacion
 	echo %camarillo%     [N] No
 	echo.
 	"%SystemRoot%\System32\choice.exe" /c:YN /n /m "%DEL%                                >:"
@@ -71,11 +71,13 @@ if "%Version%" gtr "%Versiontwo%" (
 	)
 )
 
-
+:titulot
 if "%PROCESSOR_ARCHITECTURE%"=="x86" (
-  set Titulo=%titulo1% %Versiontwo% (32 bits)
+  set Titulo=%titulo1% %Versiontwo% %sinconexiona% (32 bits)
+  title %Titulo%
 ) else (
-  set Titulo=%titulo1% %Versiontwo%  (64 bits)
+  set Titulo=%titulo1% %Versiontwo% %sinconexiona% (64 bits)
+  title %Titulo%
 )
 
 :menu                                                    
@@ -376,16 +378,16 @@ goto stservicios2
 
 if "%varst1%"=="n" (
 net start XblGameSave
-sc config XblGameSave start= auto
+sc config XblGameSave start= disabled
 
 net start XboxNetApiSvc
-sc config XboxNetApiSvc start= auto
+sc config XboxNetApiSvc start= disabled
 
 net start XboxGipSvc
-sc config XboxGipSvc start= auto
+sc config XboxGipSvc start= disabled
 
 net start XblAuthManager
-sc config XboxGipSvc start= auto
+sc config XboxGipSvc start= disabled
 goto stservicios2
 )
 
@@ -629,6 +631,7 @@ timeout /T 5 >nul
 goto menu
 
 :sinconexioni
+set sinconexiona=No tienes internet
 echo %Yellow%
 cls
 echo =================================================
