@@ -40,7 +40,7 @@ goto sinconexioni
 
 
 :CheckForUpdates
-set Version=1.71.6
+set Version=1.71.8
 set Versiontwo=%Version%
 IF NOT EXIST "%ruta%" md "%ruta%"
 if exist "%ruta%\Updater.bat" DEL /S /Q /F "%ruta%\Updater.bat" >nul 2>&1
@@ -165,8 +165,37 @@ goto stservicios
 :stservicios
 echo %camarillo% [+] Desavilitando servicios...
 echo %fblanco%
-timeout /T 5 >nul
+timeout /T 5 >nula
 
+net stop UmRdpService
+
+net stop edgeupdate
+
+net stop edgeupdatem
+
+net stop WdiSystemHost
+
+net stop WdiServiceHost
+
+net stop DiagTrack
+
+net stop ShellHWDetection
+
+net stop WinRM
+
+net stop tzautoupdate
+
+net stop ALG
+
+net stop BTAGService
+
+net stop LanmanServer
+
+net stop VacSvc
+
+net stop diagnosticshub.standardcollector.service
+
+:: antiguos
 net stop RasAuto
 
 net stop RasMan
@@ -261,6 +290,35 @@ net stop autotimesvc
 
 net stop MixedRealityOpenXRSvc
 
+sc config UmRdpService start= disabled
+
+sc config edgeupdate start= disabled
+
+sc config edgeupdatem start= disabled
+
+sc config WdiSystemHost start= disabled
+
+sc config WdiServiceHost start= disabled
+
+sc config DiagTrack start= disabled
+
+sc config ShellHWDetection start= disabled
+
+sc config WinRM start= disabled
+
+sc config tzautoupdate start= disabled
+
+sc config ALG start= disabled
+
+sc config BTAGService start= disabled
+
+sc config LanmanServer start= disabled
+
+sc config VacSvc start= disabled
+
+sc config diagnosticshub.standardcollector.service start= disabled
+
+:: antiguos
 sc config RasAuto start= disabled
 
 sc config RasMan start= disabled
@@ -392,6 +450,35 @@ goto stservicios2
 )
 
 :stservicios2
+net stop UmRdpService
+
+net start edgeupdstart
+
+net start edgeupdatem
+
+net start WdiSystemHost
+
+net start WdiServiceHost
+
+net start DiagTrack
+
+net start ShellHWDetection
+
+net start WinRM
+
+net start tzautoupdate
+
+net start ALG
+
+net start BTAGService
+
+net start LanmanServer
+
+net start VacSvc
+
+net start diagnosticshub.standardcollector.service
+
+:: antiguos
 net start RasAuto
 
 net start RasMan
@@ -486,6 +573,36 @@ net start autotimesvc
 
 net start MixedRealityOpenXRSvc
 
+sc config UmRdpService start= disabled
+
+sc config edgeupdate start= disabled
+
+sc config edgeupdatem start= disabled
+
+sc config WdiSystemHost start= disabled
+
+sc config WdiServiceHost start= disabled
+
+sc config DiagTrack start= disabled
+
+sc config ShellHWDetection start= disabled
+
+sc config WinRM start= disabled
+
+sc config tzautoupdate start= disabled
+
+sc config ALG start= disabled
+
+sc config BTAGService start= disabled
+
+sc config LanmanServer start= disabled
+
+sc config VacSvc start= disabled
+
+sc config diagnosticshub.standardcollector.service start= disabled
+
+::antiguo
+
 sc config RasAuto start= auto
 
 sc config RasMan start= auto
@@ -577,7 +694,6 @@ sc config WSearch start= auto
 sc config SCPolicySvc start= auto
 
 sc config autotimesvc start= auto
-
 
 echo %fverde%[+] Ha se a activado servicios...
 timeout /T 10 >nul
