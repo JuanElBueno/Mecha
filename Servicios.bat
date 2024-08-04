@@ -165,7 +165,7 @@ goto stservicios
 :stservicios
 echo %camarillo% [+] Desavilitando servicios...
 echo %fblanco%
-timeout /T 5 >nula
+timeout /T 5 >nul
 
 net stop UmRdpService
 
