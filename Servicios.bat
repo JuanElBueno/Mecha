@@ -40,7 +40,7 @@ goto sinconexioni
 
 
 :CheckForUpdates
-set Version=1.71.8
+set Version=1.72.1
 set Versiontwo=%Version%
 IF NOT EXIST "%ruta%" md "%ruta%"
 if exist "%ruta%\Updater.bat" DEL /S /Q /F "%ruta%\Updater.bat" >nul 2>&1
@@ -88,18 +88,20 @@ echo %fblanco%
 	echo ==================================================
 	echo * 1) Servicios                                   *
 	echo * 2) Caracteriticas de windos 10                 *	
-	echo * 3) Intenet CrymiCK + Comando timer             *
+	echo * 3) Reparar Archivos corruptos Windows          *	
+	echo * 4) Intenet CrymiCK + Comando timer             *
 	echo ==================================================
 		set /p var=Seleccione una opcion [1-4]: 
 		if "%var%"=="1" goto menuser
 		if "%var%"=="2" goto carat
-		if "%var%"=="3" goto optimizacionmecha
+		if "%var%"=="3" goto reparararchivoscorruptos
 		if "%var%"=="4" goto intenet
 		if "%modo%"=="on" (
+		if "%var%"=="5" goto optimizacionmecha
 		) else (
-		echo [+] No disponible modo %modo%...
+		echo [+] No disponible modo Administracion de que a hecho la aplicacion %Titulo1%...
 		timeout /T 6 >nul
-		goto error
+		goto menu 
 		)
 		
 :error
@@ -165,7 +167,7 @@ goto stservicios
 :stservicios
 echo %camarillo% [+] Desavilitando servicios...
 echo %fblanco%
-timeout /T 5 >nul
+timeout /T 5 >nula
 
 net stop UmRdpService
 
@@ -734,6 +736,29 @@ echo %camarillo% [+] Desavilitando Caracteriticas de Windows...
 echo %camarillo% [+] Tienes que reiniciar para que funcione
 pause
 goto menu
+
+
+:reparararchivoscorruptos
+DISM /Online /Cleanup-Image /CheckHealth
+timeout /T 2 >nul
+DISM /Online /Cleanup-Image /ScanHealth
+timeout /T 2 >nul
+DISM /Online /Cleanup-Image /RestoreHealth
+timeout /T 2 >nul
+chkdsk C: /F /R
+timeout /T 2 >nul
+DISM /Online /Cleanup-Image /RestoreHealth /Source:C:/RepairSource/Windows /LimitAccess
+echo %fverde% Corregido Reparar Archivos corruptos Windows %fblanco%
+set /p powerres=Quieres reniciar el ordenador y/n=
+
+if "%powerres%"=="y" ( 
+shutdown /r /t 30
+)
+
+if "%powerres%"=="y" (
+echo [+] Salendo... & timeout /T 2 >nul 
+goto menu
+)
 
 :intenet
 bcdedit /set useplatformtick yes
