@@ -40,7 +40,7 @@ goto sinconexioni
 
 
 :CheckForUpdates
-set Version=1.75.3
+set Version=1.78.5
 set Versiontwo=%Version%
 IF NOT EXIST "%ruta%" md "%ruta%"
 if exist "%ruta%\Updater.bat" DEL /S /Q /F "%ruta%\Updater.bat" >nul 2>&1
@@ -2000,7 +2000,7 @@ cd %optimizacion%
 powershell -Command "iwr 'https://github.com/abbodi1406/vcredist/releases/download/v0.85.0/VisualCppRedist_AIO_x86_x64.exe' -OutFile 'VisualCppRedist_AIO_x86_x64.exe'"
 
 :: Verifica si la descarga fue exitosa
-if exist VisualCppRedist_AIO_x86_x64.exe (
+if exist %optimizacion%\VisualCppRedist_AIO_x86_x64.exe (
     echo Archivo descargado con éxito.
 
     :: Ejecuta el instalador con el argumento /Y y espera a que termine
