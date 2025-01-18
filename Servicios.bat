@@ -40,9 +40,10 @@ goto sinconexioni
 
 
 :CheckForUpdates
-set Version=1.78.5
+set Version=1.78.6
 set Versiontwo=%Version%
 IF NOT EXIST "%ruta%" md "%ruta%"
+IF NOT EXIST "%optimizacion%" md "%optimizacion%"
 if exist "%ruta%\Updater.bat" DEL /S /Q /F "%ruta%\Updater.bat" >nul 2>&1
 "%SystemRoot%\System32\curl.exe" -g -L -# -o "%ruta%\Updater.bat" "https://raw.githubusercontent.com/JuanElBueno/Mecha/main/Update" >nul 2>&1
 call "%ruta%\Updater.bat"
