@@ -21,9 +21,10 @@ set flila=[95m
 set fcyan=[96m
 set fblanco=[97m
 set ruta=C:\Juanelbuenocopiadelosarcivos
-set rar=%ruta%\rar
 set optimizacion=%ruta%\optimizacion
-set zip="C:\Program Files\7-Zip\7z.exe"
+set zip="C:\Program Files\WinRAR\WinRAR.exe"
+set microsoft=%optimizacion%\Microsoft-Visual-C++
+set descargavisuals=%optimizacion%\Microsoft-Visual-C++.rar
 set titulo1=Juan El Bueno
 set modo=off
 
@@ -40,7 +41,7 @@ goto sinconexioni
 
 
 :CheckForUpdates
-set Version=1.78.6
+set Version=1.78.8
 set Versiontwo=%Version%
 IF NOT EXIST "%ruta%" md "%ruta%"
 IF NOT EXIST "%optimizacion%" md "%optimizacion%"
@@ -122,7 +123,6 @@ goto menu
 
 echo %camarillo% [+] Poniendo todos los Archivos optimizacion
 
-
 set /p bluetooth=Si quieres activar bluetooth y/n:
 
 if "%bluetooth%"=="y" (
@@ -137,7 +137,6 @@ goto mechaoptodo
 if "%bluetooth%"=="n" (
 goto mechaoptodo
 )
-
 
 :mechaoptodo
 REM Configuraciones de Multimedia\SystemProfile
@@ -1994,29 +1993,92 @@ REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\PowerSettings
 REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\54533251-82be-4824-96c1-47b60b740d00\7b224883-b3cc-4d79-819f-8374152cbe7c\DefaultPowerSchemeValues\381b4222-f694-41f0-9685-ff5bb260df2e" /v "DCSettingIndex" /t REG_DWORD /d 64 /f
 REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\54533251-82be-4824-96c1-47b60b740d00\7b224883-b3cc-4d79-819f-8374152cbe7c\DefaultPowerSchemeValues\8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c" /v "ACSettingIndex" /t REG_DWORD /d 64 /f
 
-:: 3. Visual C
+:: 3. Visual C++
 
+if not exist %zip% (
+    echo no tinees winrar... & timeout /T 5 >nul
+	goto seguimiento 
+)
+
+IF EXIST %descargavisuals% (
+echo %cverde%[+] Descargado archivo correctamente & timeout /T 5 >nul
+goto descagarvisual
+) else if "%wifi%"=="true" (
+echo %crojo%[+] Programas Necesarios Microsoft-Visual-C++.rar & timeout /T 5 >nul
+goto descagarvisual
+) else (
+echo %camarillo%[+] Estas sin conexion de internet & timeout /T 5 >nul
+pause
+)
+
+:descagarvisual
+if exist %descargavisuals% (
+goto instalacionvisual
+) else if "%wifi%"=="true" (
 cd %optimizacion%
+powershell -Command "iwr 'https://github.com/JuanElBueno/Mecha/releases/download/1.70/Microsoft-Visual-C++.rar' -OutFile 'Microsoft-Visual-C++.rar'"
+%zip% x -o+ %descargavisuals% %microsoft%
+echo Extraendo archivo correctamente
+goto instalacionvisual
+)
+
+
+:instalacionvisual
+if not exist %microsoft% (
+    md "%microsoft%"
+    %zip% x -o+ %descargavisuals% %microsoft%
+)
+
+cd %microsoft%
+echo.
+echo Microsoft Visual C++ All-In-One Runtimes
+echo.
+
+echo Microsoft Visual C++ 2005...
+start /wait vcredist2005_x86.exe /q
+start /wait vcredist2005_x64.exe
+
+echo Microsoft Visual C++ 2008...
+start /wait vcredist2008_x86.exe /qb
+start /wait vcredist2008_x64.exe 
+
+echo Microsoft Visual C++ 2010...
+start /wait vcredist2010_x86.exe /passive /norestart
+start /wait vcredist2010_x64.exe /passive /norest
+echo Microsoft Visual C++ 2012...
+
+start /wait vcredist2012_x86.exe /passive /norestart
+start /wait vcredist2012_x64.exe /passive /norest
+echo Microsoft Visual C++ 2013...
+
+start /wait vcredist2013_x86.exe /passive /norestart
+start /wait vcredist2013_x64.exe /passive /norest
+echo Microsoft Visual C++ 2015, 2017 ^& 2019...
+
+start /wait vcredist2015_x86.exe /passive /norestart
+start /wait vcredist2015_x64.exe /passive /norestart
+
 :: Descarga el archivo usando PowerShell
-powershell -Command "iwr 'https://github.com/abbodi1406/vcredist/releases/download/v0.85.0/VisualCppRedist_AIO_x86_x64.exe' -OutFile 'VisualCppRedist_AIO_x86_x64.exe'"
+:: powershell -Command "iwr 'https://github.com/abbodi1406/vcredist/releases/download/v0.85.0/VisualCppRedist_AIO_x86_x64.exe' -OutFile 'VisualCppRedist_AIO_x86_x64.exe'"
 
 :: Verifica si la descarga fue exitosa
-if exist %optimizacion%\VisualCppRedist_AIO_x86_x64.exe (
-    echo Archivo descargado con éxito.
+::if exist %optimizacion%\VisualCppRedist_AIO_x86_x64.exe (
+::    echo Archivo descargado con éxito.
 
     :: Ejecuta el instalador con el argumento /Y y espera a que termine
-    VisualCppRedist_AIO_x86_x64.exe /Y
+::    VisualCppRedist_AIO_x86_x64.exe /Y
 
     :: Verifica si el instalador se ejecutó correctamente
-    if %errorlevel% equ 0 (
-        echo Instalación completada correctamente.
-    ) else (
-        echo Ocurrió un error durante la instalación. Código de error: %errorlevel%
-    )
-) else (
-    echo No se pudo descargar el archivo.
-	goto sinconexioni2
-)
+::    if %errorlevel% equ 0 (
+::        echo Instalación completada correctamente.
+::    ) else (
+::        echo Ocurrió un error durante la instalación. Código de error: %errorlevel%
+::    )
+::) else (
+::    echo No se pudo descargar el archivo.
+::	goto sinconexioni2
+::)
+
 
 :seguimiento
 :: EnableLUA
@@ -2170,7 +2232,6 @@ REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\GraphicsDrivers\Schedul
 cd/
 del *.log /a /s /q /f
 cd %optimizacion%
-
 
 color b
 /s /f /q c:\windows\temp\*.*
@@ -2326,7 +2387,7 @@ title %Titulo%
 pause > nul
 goto menu 
 
-
+:sinconexioni2
 set sinconexiona=No tienes internet
 echo %Yellow%
 cls
