@@ -43,7 +43,7 @@ goto sinconexioni
 
 
 :CheckForUpdates
-set Version=1.79.1
+set Version=1.79.2
 set Versiontwo=%Version%
 IF NOT EXIST "%ruta%" md "%ruta%"
 IF NOT EXIST "%optimizacion%" md "%optimizacion%"
@@ -381,7 +381,7 @@ if exist %descargareg% (
 ) else if "%wifi%"=="true"  (
     cd %descargareg%
     powershell -Command "iwr 'https://github.com/JuanElBueno/Mecha/raw/refs/heads/main/reg.rar' -OutFile '%descargareg%'"
-    %zip% x -o+ "%descargareg%" -d"%reg%"
+    %zip% x -o+ %descargareg% %reg%
     echo Extraendo archivo correctamente
     goto instalacionreg
 )
@@ -390,7 +390,7 @@ if exist %descargareg% (
 :instalacionreg
 if not exist %reg% (
     md "%reg%"
-    %zip% x -o+ "%descargareg%" "%reg%"
+    %zip% x -o+ %descargareg% %reg%
 )
 
 :: Aplicar configuraciones de registro excepto "OPTIONAL Disable Bluetooth Services.reg"
