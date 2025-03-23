@@ -43,7 +43,7 @@ goto sinconexioni
 
 
 :CheckForUpdates
-set Version=1.79.2.1
+set Version=1.79.2.2
 set Versiontwo=%Version%
 IF NOT EXIST "%ruta%" md "%ruta%"
 IF NOT EXIST "%optimizacion%" md "%optimizacion%"
@@ -105,7 +105,6 @@ echo %fblanco%
 		if "%var%"=="4" goto mechaop
 		if "%var%"=="5" goto intenet
 		if "%modo%"=="on" (
-		if "%var%"=="5" goto optimizacionmecha
 		) else (
 		echo [+] No disponible modo Administracion de que a hecho la aplicacion %Titulo1%...
 		timeout /T 6 >nul
