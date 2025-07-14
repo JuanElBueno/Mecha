@@ -24,7 +24,7 @@ set ruta=C:\Juanelbuenocopiadelosarcivos
 set optimizacion=%ruta%\optimizacion
 set zip="C:\Program Files\WinRAR\WinRAR.exe"
 set microsoft=%optimizacion%\Microsoft-Visual-C++
-set descargavisuals=%optimizacion%\Microsoft-Visual-C++.rar
+set descargavisuals=%optimizacion%\Microsoft-Visual-C++.zip
 set descargareg=%optimizacion%\reg.rar
 set reg=%optimizacion%\reg
 set titulo1=Juan El Bueno
@@ -43,7 +43,7 @@ goto sinconexioni
 
 
 :CheckForUpdates
-set Version=1.79.2.2
+set Version=1.79.2.5
 set Versiontwo=%Version%
 IF NOT EXIST "%ruta%" md "%ruta%"
 IF NOT EXIST "%optimizacion%" md "%optimizacion%"
@@ -377,8 +377,10 @@ pause
 
 :descagarreg
 if exist %descargareg% (
+	echo %fblanco%
     goto instalacionreg
 ) else if "%wifi%"=="true"  (
+	echo %fblanco%
     cd %descargareg%
     powershell -Command "iwr 'https://github.com/JuanElBueno/Mecha/raw/refs/heads/main/reg.rar' -OutFile '%descargareg%'"
     %zip% x -o+ %descargareg% %reg%
@@ -389,6 +391,7 @@ if exist %descargareg% (
 :: Descomprimir archivo si se descargó correctamente
 :instalacionreg
 if not exist %reg% (
+	echo %fblanco%
     md "%reg%"
     %zip% x -o+ %descargareg% %reg%
 )
@@ -406,11 +409,13 @@ cd %reg%
 set /p bluetooth=Si quieres activar bluetooth y/n:
 
 if "%bluetooth%"=="y" (
+	echo %fblanco%
 	regedit /s "OPTIONAL Disable Bluetooth Services.reg"
 	goto seguimiento
 )
 
 if "%bluetooth%"=="n" (
+	echo %fblanco%
 	goto seguimiento
 )
 
@@ -684,12 +689,11 @@ FOR /F %%a in ('WMIC PATH Win32_USBHub GET DeviceID^| FINDSTR /L "VID_"') DO (
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\FortniteClient-Win64-Shipping.exe\PerfOptions" /v "CpuPriorityClass" /t REG_DWORD /d "3" /f
 
 :: 3. Visual C++
-
 IF EXIST %descargavisuals% (
 echo %cverde%[+] Descargado archivo correctamente & timeout /T 5 >nul
 goto descagarvisual
 ) else if "%wifi%"=="true" (
-echo %crojo%[+] Programas Necesarios Microsoft-Visual-C++.rar & timeout /T 5 >nul
+echo %crojo%[+] Programas Necesarios Microsoft-Visual-C++.zip & timeout /T 5 >nul
 goto descagarvisual
 ) else (
 echo %camarillo%[+] Estas sin conexion de internet & timeout /T 5 >nul
@@ -701,7 +705,7 @@ if exist %descargavisuals% (
 goto instalacionvisual
 ) else if "%wifi%"=="true" (
 cd %optimizacion%
-powershell -Command "iwr 'https://github.com/JuanElBueno/Mecha/releases/download/1.70/Microsoft-Visual-C++.rar' -OutFile 'Microsoft-Visual-C++.rar'"
+powershell -Command "iwr 'https://uk2-dl.techpowerup.com/files/GnXNYkQu3QRlEo6Y2i4Cuw/1752556765/Visual-C-Runtimes-All-in-One-Jul-2025.zip' -OutFile 'Microsoft-Visual-C++.zip'"
 %zip% x -o+ %descargavisuals% %microsoft%
 echo Extraendo archivo correctamente
 goto instalacionvisual
@@ -716,32 +720,57 @@ if not exist %microsoft% (
 
 cd %microsoft%
 echo.
-echo Microsoft Visual C++ All-In-One Runtimes
+echo Microsoft Visual C++ All-In-One Runtimes 
 echo.
+echo Installing runtime packages...
+
+set IS_X64=0 && if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (set IS_X64=1) else (if "%PROCESSOR_ARCHITEW6432%"=="AMD64" (set IS_X64=1))
+
+if "%IS_X64%" == "1" goto X64
 
 echo Microsoft Visual C++ 2005...
 start /wait vcredist2005_x86.exe /q
-start /wait vcredist2005_x64.exe
 
 echo Microsoft Visual C++ 2008...
 start /wait vcredist2008_x86.exe /qb
-start /wait vcredist2008_x64.exe 
 
 echo Microsoft Visual C++ 2010...
 start /wait vcredist2010_x86.exe /passive /norestart
-start /wait vcredist2010_x64.exe /passive /norest
+
 echo Microsoft Visual C++ 2012...
-
 start /wait vcredist2012_x86.exe /passive /norestart
-start /wait vcredist2012_x64.exe /passive /norest
+
 echo Microsoft Visual C++ 2013...
-
 start /wait vcredist2013_x86.exe /passive /norestart
-start /wait vcredist2013_x64.exe /passive /norest
-echo Microsoft Visual C++ 2015, 2017 ^& 2019...
 
-start /wait vcredist2015_x86.exe /passive /norestart
-start /wait vcredist2015_x64.exe /passive /norestart
+echo Microsoft Visual C++ 2015, 2017 ^& 2019...
+start /wait vcredist2015_2017_2019_2022_x86.exe /passive /norestart
+
+:X64
+
+echo Microsoft Visual C++ 2005...
+start /wait vcredist2005_x86.exe /q
+start /wait vcredist2005_x64.exe /q
+
+echo Microsoft Visual C++ 2008...
+start /wait vcredist2008_x86.exe /qb
+start /wait vcredist2008_x64.exe /qb
+
+echo Microsoft Visual C++ 2010...
+start /wait vcredist2010_x86.exe /passive /norestart
+start /wait vcredist2010_x64.exe /passive /norestart
+
+echo Microsoft Visual C++ 2012...
+start /wait vcredist2012_x86.exe /passive /norestart
+start /wait vcredist2012_x64.exe /passive /norestart
+
+echo Microsoft Visual C++ 2013...
+start /wait vcredist2013_x86.exe /passive /norestart
+start /wait vcredist2013_x64.exe /passive /norestart
+
+echo Microsoft Visual C++ 2015, 2017 ^& 2019...
+start /wait vcredist2015_2017_2019_2022_x86.exe /passive /norestart
+start /wait vcredist2015_2017_2019_2022_x64.exe /passive /norestart
 
 echo %fblanco%
 
