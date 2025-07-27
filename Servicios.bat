@@ -43,7 +43,7 @@ goto sinconexioni
 
 
 :CheckForUpdates
-set Version=1.79.2.5
+set Version=1.79.2.6
 set Versiontwo=%Version%
 IF NOT EXIST "%ruta%" md "%ruta%"
 IF NOT EXIST "%optimizacion%" md "%optimizacion%"
@@ -78,12 +78,17 @@ if "%Version%" gtr "%Versiontwo%" (
 )
 
 :titulot
-if "%PROCESSOR_ARCHITECTURE%"=="x86" (
-  set Titulo=%titulo1% %Versiontwo% %sinconexiona% (32 bits)
-  title %Titulo%
+if defined PROCESSOR_ARCHITEW6432 (
+    set Titulo=%titulo1% %Versiontwo% %sinconexiona% (64 bits)
+    title %Titulo%
 ) else (
-  set Titulo=%titulo1% %Versiontwo% %sinconexiona% (64 bits)
-  title %Titulo%
+    if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+        set Titulo=%titulo1% %Versiontwo% %sinconexiona% (64 bits)
+        title %Titulo%
+    ) else (
+        set Titulo=%titulo1% %Versiontwo% %sinconexiona% (32 bits)
+        title %Titulo%
+    )
 )
 
 :menu                                                    
@@ -357,7 +362,7 @@ powercfg -delete 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
 powercfg -delete 381b4222-f694-41f0-9685-ff5bb260df2e
 powercfg -delete a1841308-3541-4fab-bc81-f71556f20b4a
 
-cd %descargareg%
+cd %reg%
 if not exist %zip% (
     echo No tienes WinRAR instalado. Por favor instálalo y vuelve a intentarlo.
     pause
@@ -372,7 +377,7 @@ echo %crojo%[+] Programas Necesarios reg.rar & timeout /T 5 >nul
 goto descagarreg
 ) else (
 echo %camarillo%[+] Estas sin conexion de internet & timeout /T 5 >nul
-pause
+goto sinconexioni
 )
 
 :descagarreg
@@ -381,21 +386,14 @@ if exist %descargareg% (
     goto instalacionreg
 ) else if "%wifi%"=="true"  (
 	echo %fblanco%
-    cd %descargareg%
+    cd %optimizacion%
     powershell -Command "iwr 'https://github.com/JuanElBueno/Mecha/raw/refs/heads/main/reg.rar' -OutFile '%descargareg%'"
     %zip% x -o+ %descargareg% %reg%
     echo Extraendo archivo correctamente
     goto instalacionreg
 )
 
-:: Descomprimir archivo si se descargó correctamente
 :instalacionreg
-if not exist %reg% (
-	echo %fblanco%
-    md "%reg%"
-    %zip% x -o+ %descargareg% %reg%
-)
-
 :: Aplicar configuraciones de registro excepto "OPTIONAL Disable Bluetooth Services.reg"
 cd %reg%
 for %%f in (*.reg) do (
@@ -685,7 +683,6 @@ FOR /F %%a in ('WMIC PATH Win32_USBHub GET DeviceID^| FINDSTR /L "VID_"') DO (
 	ECHO Disabling USB idling for %%a
 )
 
-
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\FortniteClient-Win64-Shipping.exe\PerfOptions" /v "CpuPriorityClass" /t REG_DWORD /d "3" /f
 
 :: 3. Visual C++
@@ -697,7 +694,7 @@ echo %crojo%[+] Programas Necesarios Microsoft-Visual-C++.zip & timeout /T 5 >nu
 goto descagarvisual
 ) else (
 echo %camarillo%[+] Estas sin conexion de internet & timeout /T 5 >nul
-pause
+goto sinconexioni
 )
 
 :descagarvisual
@@ -800,6 +797,7 @@ echo %cverde% [+] Puesto regedit Archivos optimizacion....
 echo %fblanco%
 title %Titulo%
 timeout /T 5 >nul
+set /p powerres=Quieres reniciar el ordenador y/n=
 goto menu 
 
 :sinconexioni2
@@ -1435,6 +1433,7 @@ powershell.exe Disable-WindowsOptionalFeature -FeatureName "LegacyComponents" -O
 
 echo %camarillo% [+] Desavilitando Caracteriticas de Windows...
 echo %camarillo% [+] Tienes que reiniciar para que funcione
+set /p powerres=Quieres reniciar el ordenador y/n=
 pause
 goto menu
 
@@ -1453,7 +1452,7 @@ echo %fverde% Corregido Reparar Archivos corruptos Windows %fblanco%
 set /p powerres=Quieres reniciar el ordenador y/n=
 
 if "%powerres%"=="y" ( 
-shutdown /r /t 30
+shutdown /r /t 10
 )
 
 if "%powerres%"=="y" (
