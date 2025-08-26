@@ -24,7 +24,7 @@ set ruta=C:\Juanelbuenocopiadelosarcivos
 set optimizacion=%ruta%\optimizacion
 set zip="C:\Program Files\WinRAR\WinRAR.exe"
 set microsoft=%optimizacion%\Microsoft-Visual-C++
-set descargavisuals=%optimizacion%\Microsoft-Visual-C++.zip
+set descargavisuals=%optimizacion%\Microsoft-Visual-C++.rar
 set descargareg=%optimizacion%\reg.rar
 set reg=%optimizacion%\reg
 set titulo1=Juan El Bueno
@@ -43,7 +43,7 @@ goto sinconexioni
 
 
 :CheckForUpdates
-set Version=1.79.2.6
+set Version=1.79.2.6.1
 set Versiontwo=%Version%
 IF NOT EXIST "%ruta%" md "%ruta%"
 IF NOT EXIST "%optimizacion%" md "%optimizacion%"
@@ -702,7 +702,7 @@ if exist %descargavisuals% (
 goto instalacionvisual
 ) else if "%wifi%"=="true" (
 cd %optimizacion%
-powershell -Command "iwr 'https://uk2-dl.techpowerup.com/files/GnXNYkQu3QRlEo6Y2i4Cuw/1752556765/Visual-C-Runtimes-All-in-One-Jul-2025.zip' -OutFile 'Microsoft-Visual-C++.zip'"
+powershell -Command "iwr 'https://github.com/JuanElBueno/Mecha/releases/download/1.70/Microsoft-Visual-C++.rar' -OutFile 'Microsoft-Visual-C++.rar'"
 %zip% x -o+ %descargavisuals% %microsoft%
 echo Extraendo archivo correctamente
 goto instalacionvisual
