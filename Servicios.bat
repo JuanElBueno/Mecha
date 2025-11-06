@@ -43,7 +43,7 @@ goto sinconexioni
 
 
 :CheckForUpdates
-set Version=1.79.2.6.1
+set Version=1.79.2.7
 set Versiontwo=%Version%
 IF NOT EXIST "%ruta%" md "%ruta%"
 IF NOT EXIST "%optimizacion%" md "%optimizacion%"
@@ -701,13 +701,13 @@ goto sinconexioni
 if exist %descargavisuals% (
 goto instalacionvisual
 ) else if "%wifi%"=="true" (
+md "%microsoft%"
 cd %optimizacion%
 powershell -Command "iwr 'https://github.com/JuanElBueno/Mecha/releases/download/1.70/Microsoft-Visual-C++.rar' -OutFile 'Microsoft-Visual-C++.rar'"
 %zip% x -o+ %descargavisuals% %microsoft%
 echo Extraendo archivo correctamente
 goto instalacionvisual
 )
-
 
 :instalacionvisual
 if not exist %microsoft% (
@@ -831,37 +831,43 @@ goto seguimiento
 		)
 
 :comandos1
-set /p varst1=Si quieres activar Xbox Services y/n:
+@echo off
+set /p varst1=¿Quieres activar los servicios de Xbox? (y/n): 
 
-if "%varst1%"=="y" (
-net start XblGameSave
-sc config XblGameSave start= auto
+if /i "%varst1%"=="y" (
+    echo Activando servicios de Xbox...
+    net start XblGameSave
+    sc config XblGameSave start= auto
 
-net start XboxNetApiSvc
-sc config XboxNetApiSvc start= auto
+    net start XboxNetApiSvc
+    sc config XboxNetApiSvc start= auto
 
-net start XboxGipSvc
-sc config XboxGipSvc start= auto
+    net start XboxGipSvc
+    sc config XboxGipSvc start= auto
 
-net start XblAuthManager
-sc config XboxGipSvc start= auto
-goto stservicios
+    net start XblAuthManager
+    sc config XblAuthManager start= auto
+
+    echo Servicios activados correctamente.
+    goto stservicios
+) else (
+    echo Desactivando servicios de Xbox...
+    net stop XblGameSave
+    sc config XblGameSave start= disabled
+
+    net stop XboxNetApiSvc
+    sc config XboxNetApiSvc start= disabled
+
+    net stop XboxGipSvc
+    sc config XboxGipSvc start= disabled
+
+    net stop XblAuthManager
+    sc config XblAuthManager start= disabled
+
+    echo Servicios desactivados correctamente.
+    goto stservicios
 )
 
-if "%varst1%"=="n" (
-net stop XblGameSave
-sc config XblGameSave start= disabled
-
-net stop XboxNetApiSvc
-sc config XboxNetApiSvc start= disabled
-
-net stop XboxGipSvc
-sc config XboxGipSvc start= disabled
-
-net stop XblAuthManager
-sc config XboxGipSvc start= disabled
-goto stservicios
-)
 
 :stservicios
 echo %camarillo% [+] Desavilitando servicios...
@@ -1118,36 +1124,38 @@ timeout /T 10 >nul
 goto menu
 
 :comandos10
-set /p varst1=Si quieres activar Xbox Services y/n:
+set /p varst1=¿Quieres activar los servicios de Xbox? (y/n): 
 
-if "%varst1%"=="y" (
-net start XblGameSave
-sc config XblGameSave start= auto
+if /i "%varst1%"=="y" (
+    echo Activando servicios de Xbox...
+    net start XblGameSave
+    sc config XblGameSave start= auto
 
-net start XboxNetApiSvc
-sc config XboxNetApiSvc start= auto
+    net start XboxNetApiSvc
+    sc config XboxNetApiSvc start= auto
 
-net start XboxGipSvc
-sc config XboxGipSvc start= auto
+    net start XboxGipSvc
+    sc config XboxGipSvc start= auto
 
-net start XblAuthManager
-sc config XboxGipSvc start= auto
-goto stservicios2
-)
+    net start XblAuthManager
+    sc config XblAuthManager start= auto
 
-if "%varst1%"=="n" (
-net stop XblGameSave
-sc config XblGameSave start= disabled
+    echo Servicios activados correctamente.
+    goto stservicios2
+) else (
+    echo Desactivando servicios de Xbox...
+    net stop XblGameSave
+    sc config XblGameSave start= disabled
 
-net stop XboxNetApiSvc
-sc config XboxNetApiSvc start= disabled
+    net stop XboxNetApiSvc
+    sc config XboxNetApiSvc start= disabled
 
-net stop XboxGipSvc
-sc config XboxGipSvc start= disabled
+    net stop XboxGipSvc
+    sc config XboxGipSvc start= disabled
 
-net stop XblAuthManager
-sc config XboxGipSvc start= disabled
-goto stservicios2
+    net stop XblAuthManager
+    sc config XblAuthManager start= disabled
+    goto stservicios2
 )
 
 :stservicios2
