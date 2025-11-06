@@ -43,7 +43,7 @@ goto sinconexioni
 
 
 :CheckForUpdates
-set Version=1.79.2.7.1
+set Version=1.79.2.8
 set Versiontwo=%Version%
 IF NOT EXIST "%ruta%" md "%ruta%"
 IF NOT EXIST "%optimizacion%" md "%optimizacion%"
@@ -80,19 +80,18 @@ if "%Version%" gtr "%Versiontwo%" (
 :titulot
 if defined PROCESSOR_ARCHITEW6432 (
     rem Sistema operativo de 64 bits (aunque este proceso sea de 32 bits)
-    set "Titulo=%titulo1% %Versiontwo% %sinconexiona% (64 bits)"
-	title %Titulo%
+    set Titulo=%titulo1% %Versiontwo% %sinconexiona% (64 bits)
 ) else (
     if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
         rem Proceso de 64 bits
-        set "Titulo=%titulo1% %Versiontwo% %sinconexiona% (64 bits)"
-		title %Titulo%
-    ) else (
+        set Titulo=%titulo1% %Versiontwo% %sinconexiona% (64 bits)
+
         rem Sistema operativo de 32 bits
-        set "Titulo=%titulo1% %Versiontwo% %sinconexiona% (32 bits)"
-		title %Titulo%
+        set Titulo=%titulo1% %Versiontwo% %sinconexiona% (32 bits)
     )
 )
+title %Titulo%
+
 
 :menu                                                    
 echo %fblanco%
