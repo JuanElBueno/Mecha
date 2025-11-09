@@ -31,7 +31,7 @@ set titulo1=Juan El Bueno
 set modo=off
 
 echo %camarillo% Comprobando conectividad ... %fblanco%
-ping -n 1 juanelbueno.github.io 
+ping -n 1 8.8.8.8
 
 if %ERRORLEVEL%==0 ( 
 set wifi=true
@@ -1161,7 +1161,7 @@ if /i "%varst1%"=="y" (
 )
 
 :stservicios2
-net stop UmRdpService
+net start UmRdpService
 
 net start edgeupdstart
 
