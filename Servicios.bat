@@ -43,7 +43,7 @@ goto sinconexioni
 
 
 :CheckForUpdates
-set Version=1.79.2.8
+set Version=1.79.2.9
 set Versiontwo=%Version%
 IF NOT EXIST "%ruta%" md "%ruta%"
 IF NOT EXIST "%optimizacion%" md "%optimizacion%"
@@ -870,8 +870,47 @@ if /i "%varst1%"=="y" (
     goto stservicios
 )
 
-
 :stservicios
+set /p bluetoothV2=Si quieres activar bluetooth y/n:
+
+if "%bluetoothV2%"=="y" (
+	echo %fblanco%
+
+	sc config bthserv start= disabled
+    net stop bthserv
+
+    sc config BTAGService start= disabled
+    net stop BTAGService
+
+    sc config BthAvctpSvc start= disabled
+    net stop BthAvctpSvc
+
+    sc config BthA2dpSvc start= disabled
+    net stop BthA2dpSvc 
+
+    echo Servicios activados correctamente.
+    goto ststarss
+)
+
+if "%bluetoothV2%"=="n" (
+	echo %fblanco%
+    sc config bthserv start= auto
+    net start bthserv
+
+    sc config BTAGService start= auto
+    net stop BTAGService
+
+    sc config BthAvctpSvc start= auto
+    net stop BthAvctpSvc
+
+    sc config BthA2dpSvc start= auto
+    net stop BthA2dpSvc 
+    echo Servicios desactivados correctamente.
+    goto ststarss
+)
+
+
+:ststarss
 echo %camarillo% [+] Desavilitando servicios...
 echo %fblanco%
 timeout /T 5 >nula
@@ -895,8 +934,6 @@ net stop WinRM
 net stop tzautoupdate
 
 net stop ALG
-
-net stop BTAGService
 
 net stop LanmanServer
 
@@ -950,8 +987,6 @@ net stop RemoteRegistry
 net stop PcaSvc
 
 net stop FontCache
-
-net stop bthserv
 
 net stop SensorDataService
 
@@ -1019,8 +1054,6 @@ sc config tzautoupdate start= disabled
 
 sc config ALG start= disabled
 
-sc config BTAGService start= disabled
-
 sc config LanmanServer start= disabled
 
 sc config VacSvc start= disabled
@@ -1071,8 +1104,6 @@ sc config RemoteRegistry start= disabled
 sc config PcaSvc start= disabled
 
 sc config FontCache start= disabled
-
-sc config bthserv start= disabled
 
 sc config SensorDataService start= disabled
 
@@ -1161,6 +1192,26 @@ if /i "%varst1%"=="y" (
 )
 
 :stservicios2
+
+set /p bluetoothV2=Si quieres activar bluetooth y/n:
+
+if "%bluetoothV2%"=="y" (
+	echo %fblanco%
+	sc config bthserv start= disabled
+    net stop bthserv
+    echo Servicios activados correctamente.
+    goto ststarss2
+)
+
+if "%bluetoothV2%"=="n" (
+	echo %fblanco%
+    sc config bthserv start= auto
+    net start bthserv
+    echo Servicios desactivados correctamente.
+    goto ststarss2
+)
+
+:ststarss2
 net start UmRdpService
 
 net start edgeupdstart
@@ -1180,8 +1231,6 @@ net start WinRM
 net start tzautoupdate
 
 net start ALG
-
-net start BTAGService
 
 net start LanmanServer
 
@@ -1235,8 +1284,6 @@ net start RemoteRegistry
 net start PcaSvc
 
 net start FontCache
-
-net start bthserv
 
 net start SensorDataService
 
@@ -1303,8 +1350,6 @@ sc config WinRM start= disabled
 sc config tzautoupdate start= disabled
 
 sc config ALG start= disabled
-
-sc config BTAGService start= disabled
 
 sc config LanmanServer start= disabled
 
