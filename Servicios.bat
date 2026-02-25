@@ -43,7 +43,7 @@ goto sinconexioni
 
 
 :CheckForUpdates
-set Version=1.79.2.9
+set Version=1.79.3
 set Versiontwo=%Version%
 IF NOT EXIST "%ruta%" md "%ruta%"
 IF NOT EXIST "%optimizacion%" md "%optimizacion%"
@@ -890,9 +890,8 @@ if "%bluetoothV2%"=="y" (
 
     echo Servicios activados correctamente.
     goto ststarss
-)
 
-if "%bluetoothV2%"=="n" (
+) else (
 	echo %fblanco%
     sc config bthserv start= auto
     net start bthserv
@@ -1197,18 +1196,37 @@ set /p bluetoothV2=Si quieres activar bluetooth y/n:
 
 if "%bluetoothV2%"=="y" (
 	echo %fblanco%
+
 	sc config bthserv start= disabled
     net stop bthserv
-    echo Servicios activados correctamente.
-    goto ststarss2
-)
 
-if "%bluetoothV2%"=="n" (
+    sc config BTAGService start= disabled
+    net stop BTAGService
+
+    sc config BthAvctpSvc start= disabled
+    net stop BthAvctpSvc
+
+    sc config BthA2dpSvc start= disabled
+    net stop BthA2dpSvc 
+
+    echo Servicios activados correctamente.
+    goto ststarss
+
+) else (
 	echo %fblanco%
     sc config bthserv start= auto
     net start bthserv
+
+    sc config BTAGService start= auto
+    net stop BTAGService
+
+    sc config BthAvctpSvc start= auto
+    net stop BthAvctpSvc
+
+    sc config BthA2dpSvc start= auto
+    net stop BthA2dpSvc 
     echo Servicios desactivados correctamente.
-    goto ststarss2
+    goto ststarss
 )
 
 :ststarss2
@@ -1331,31 +1349,31 @@ net start autotimesvc
 
 net start MixedRealityOpenXRSvc
 
-sc config UmRdpService start= disabled
+sc config UmRdpService start= auto
 
-sc config edgeupdate start= disabled
+sc config edgeupdate start= auto
 
-sc config edgeupdatem start= disabled
+sc config edgeupdatem start= auto
 
-sc config WdiSystemHost start= disabled
+sc config WdiSystemHost start= auto
 
-sc config WdiServiceHost start= disabled
+sc config WdiServiceHost start= auto
 
-sc config DiagTrack start= disabled
+sc config DiagTrack start= auto
 
-sc config ShellHWDetection start= disabled
+sc config ShellHWDetection start= auto
 
-sc config WinRM start= disabled
+sc config WinRM start= auto
 
-sc config tzautoupdate start= disabled
+sc config tzautoupdate start= auto
 
-sc config ALG start= disabled
+sc config ALG start= auto
 
-sc config LanmanServer start= disabled
+sc config LanmanServer start= auto
 
-sc config VacSvc start= disabled
+sc config VacSvc start= auto
 
-sc config diagnosticshub.standardcollector.service start= disabled
+sc config diagnosticshub.standardcollector.service start= auto
 
 ::antiguo
 
