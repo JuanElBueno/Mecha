@@ -22,7 +22,7 @@ set fcyan=[96m
 set fblanco=[97m
 set ruta=C:\Juanelbuenocopiadelosarcivos
 set optimizacion=%ruta%\optimizacion
-set zip="C:\Program Files\WinRAR\WinRAR.exe"
+set zip="%ProgramFiles%\WinRAR\WinRAR.exe"
 set microsoft=%optimizacion%\Microsoft-Visual-C++
 set descargavisuals=%optimizacion%\Microsoft-Visual-C++.rar
 set descargareg=%optimizacion%\reg.rar
@@ -43,7 +43,7 @@ goto sinconexioni
 
 
 :CheckForUpdates
-set Version=1.79.3
+set Version=1.79.2.9.1
 set Versiontwo=%Version%
 IF NOT EXIST "%ruta%" md "%ruta%"
 IF NOT EXIST "%optimizacion%" md "%optimizacion%"
